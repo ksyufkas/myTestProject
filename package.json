@@ -1,0 +1,36 @@
+{
+  "name": "myTestProject",
+  "version": "1.0.0",
+  "description": "Test project",
+  "author": "Kseniya Popelyaeva",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --open",
+    "build": "ng build"
+  },
+  "dependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/compiler": "^8.2.14",
+    "@angular/core": "^8.2.14",
+    "@angular/forms": "^8.2.14",
+    "@angular/platform-browser": "^8.2.14",
+    "@angular/platform-browser-dynamic": "^8.2.14",
+    "@angular/router": "^8.2.14",
+    "@angular/service-worker": "~8.2.11",
+    "@angular/animations": "^8.2.14",
+    "rxjs": "^6.5.3",
+    "zone.js": "~0.9.1",
+    "bootstrap": "^4.4.1",
+    "tslib": "^1.10.0",
+    "ngx-bootstrap": "^4.3.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^0.803.26",
+    "@angular-devkit/build-ng-packagr": "~0.800.3",
+    "@angular/cli": "^8.3.26",
+    "@angular/compiler-cli": "^8.2.14",
+    "@types/node": "^14.0.13",
+    "typescript": "~3.5.3",
+    "@schematics/angular": "^8.3.26"
+  }
+}

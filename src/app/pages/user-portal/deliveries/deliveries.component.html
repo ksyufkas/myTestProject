@@ -1,0 +1,161 @@
+<div class="deliveries">
+    <div class="card page__header header-filter" [ngClass]="{'filter--hiden': !showFilter}">
+        <div class="filter__title">
+            <span class="filter__title--text">Фильтр</span>
+            <button type="button" class="filter__title--arrow" (click)="changeVisibleFilter()"></button>
+        </div>
+        <div class="filter__content">
+            <div class="filter__block block__date-time-picker">
+                <div class="date-time-picker">
+                    <label class="date-time-picker__label">С</label>
+                    <div class="date-time-picker__pickers">
+                        <input class="date-picker"
+                               id="startDate"
+                               placeholder="Выберите дату"
+                               [bsConfig]="{ adaptivePosition: false, containerClass: 'theme-blue' }"
+                               [(ngModel)]="startDate"
+                               bsDatepicker
+                               [maxDate]="endDate">
+                    </div>
+                </div>
+                <div class="date-time-picker">
+                    <label class="date-time-picker__label">По</label>
+                    <div class="date-time-picker__pickers">
+                        <input class="date-picker"
+                               id="endDate"
+                               placeholder="Выберите дату"
+                               [bsConfig]="{ adaptivePosition: false, containerClass: 'theme-blue' }"
+                               [(ngModel)]="endDate"
+                               bsDatepicker
+                               [minDate]="startDate">
+                    </div>
+                </div>
+            </div>
+            <div class="filter__block">
+                <div class="input-with-label input-with-label--external-id">
+                    <label class="input-with-label__label" for="externalId">Внешний ID</label>
+                    <input type="text" id="externalId" class="input--text" [(ngModel)]="externalId">
+                </div>
+                <div class="input-with-label">
+                    <label class="input-with-label__label" for="deliveryId">ID доставки</label>
+                    <input type="text" id="deliveryId" class="input--text" [(ngModel)]="deliveryId">
+                </div>
+                <div class="input-with-label">
+                    <label class="input-with-label__label" for="groupId">ID группы</label>
+                    <input type="text" id="groupId" class="input--text" [(ngModel)]="groupId">
+                </div>
+            </div>
+            <div class="filter__block">
+                <input type="text" id="name" class="input--text input--name" placeholder="Наименование"
+                       [(ngModel)]="name">
+            </div>
+            <div class="filter__block">
+                <button type="button" class="button button--primary">Найти</button>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="deliveriesToDisplay.length">
+        <div *ngFor="let delivery of deliveriesToDisplay" class="card delivery-card">
+            <div class="delivery-card__header">
+                <div class="header__button">
+                    <span class="icon header__icon header__icon--repeat"></span>
+                    <button type="button"
+                            class="button-link">{{delivery.isGroup ? 'Повторить группу' : 'Повторить'}}</button>
+                </div>
+                <div *ngIf="!delivery.isClose" class="header__button">
+                    <span class="icon header__icon header__icon--done"></span>
+                    <button type="button"
+                            class="button-link">{{delivery.isGroup ? 'Закрыть группу' : 'Закрыть'}}</button>
+                </div>
+                <div *ngIf="delivery.isGroup" class="header__group-number">
+                    №{{delivery.groupNumber}}
+                </div>
+            </div>
+            <div class="delivery-card__content">
+                <div *ngFor="let deliveryPoint of delivery.deliveries" class="card delivery-point">
+                    <div class="delivery-point__header">
+                        <div class="delivery-point__status">
+                            <span
+                                    class="icon"
+                                    [ngClass]="deliveryPoint.state === deliveryStateTypeEnum.InProgress ? 'delivery-point__icon--people' : 'delivery-point__icon--accept'"
+                            ></span>
+                            {{getStateText(deliveryPoint)}}
+                        </div>
+                        <div class="delivery-point__type">
+                            {{getDeliveryTypeText(deliveryPoint)}}
+                        </div>
+                        <div class="delivery-point__info">
+                            <button type="button" class="button-link">№{{deliveryPoint.number}}</button>
+                            <span>{{deliveryPoint.date.toLocaleDateString()}}</span>
+                            <span class="info__time">
+                                <span class="icon delivery-point__icon--clock"></span>
+                                {{deliveryPoint.date.toLocaleTimeString().slice(0, -3)}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="delivery-point__cost-weight">
+                        <div class="cost-weight">
+                            <span class="cost-weight__value">{{deliveryPoint.cost}} &#8381;</span>
+                            <span class="cost-weight__title">стоимость</span>
+                        </div>
+                        <div class="cost-weight">
+                            <span class="cost-weight__value">{{deliveryPoint.weight}} кг</span>
+                            <span class="cost-weight__title">вес</span>
+                        </div>
+                    </div>
+                    <div class="delivery-point__path">
+                        <ul class="path__list"
+                            [ngClass]="{'show-marker': deliveryPoint.state === deliveryStateTypeEnum.InProgress}">
+                            <li *ngIf="deliveryPoint.sender">
+                                <div>
+                                    <p>
+                                        <span><b>Отправитель: </b></span>
+                                        <span> {{deliveryPoint.sender.name}}, </span>
+                                        <span>{{deliveryPoint.sender.phone}}</span>
+                                    </p>
+                                    <p>
+                                        <span>{{deliveryPoint.sender.address}}</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <p>
+                                        <span><b>Получатель: </b></span>
+                                        <span>{{deliveryPoint.recipient.name}}, </span>
+                                        <span>{{deliveryPoint.recipient.phone}}</span>
+                                    </p>
+                                    <p>
+                                        <span>{{deliveryPoint.recipient.address}}</span>
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pagination-panel">
+            <pagination
+                    class="page__pagination inline-pagination"
+                    *ngIf="deliveriesToDisplay.length < deliveriesCount"
+                    [totalItems]="deliveriesCount"
+                    [(ngModel)]="pagination.page"
+                    [itemsPerPage]="pagination.itemsPerPage"
+                    [maxSize]="7"
+                    [boundaryLinks]="true"
+                    (pageChanged)="setDeliveriesToDisplay($event)"
+                    previousText="&#8592; Назад"
+                    nextText="Вперёд &#8594;"
+                    firstText="&laquo;"
+                    lastText="&raquo;"
+            ></pagination>
+            <div class="count-elements">
+                <span>Показать на странице:</span>
+                <button type="button" class="button-link" (click)="changeCountElement(25)">25,</button>
+                <button type="button" class="button-link" (click)="changeCountElement(50)">50,</button>
+                <button type="button" class="button-link" (click)="changeCountElement(100)">100</button>
+            </div>
+        </div>
+    </ng-container>
+</div>

@@ -1,0 +1,214 @@
+@import '../../../styles/variables.less';
+@import "../../../styles/mixins";
+@import 'filter.less';
+
+.deliveries {
+  .icon {
+    &--repeat {
+      background-image: @icon-repeat;
+    }
+
+    &--done {
+      background-image: @icon-done;
+    }
+  }
+
+  .card {
+    background-color: @card-background-color;
+    border-radius: 6px;
+    padding: 5px 5px 10px;
+  }
+
+  .delivery-card {
+    margin-bottom: 10px;
+    padding: 5px 0 10px;
+
+    &__header {
+      height: 35px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      color: @primary-color;
+      font-size: 12px;
+      .set-padding(@padding);
+
+      .header {
+        &__icon {
+          &--repeat {
+            background-image: @icon-repeat;
+          }
+
+          &--done {
+            background-image: @icon-done;
+          }
+        }
+
+        &__button {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-direction: row;
+          margin-right: 10px;
+        }
+
+        &__group-number {
+          color: @secondary-color;
+          margin-left: auto;
+        }
+      }
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background-color: @background-color;
+
+      .delivery-point {
+        &.card {
+          width: 100%;
+          padding: 0;
+          margin: 0 0 3px;
+          border-top-right-radius: 3px;
+          border-top-left-radius: 3px;
+
+          &:first-child {
+            border-bottom-right-radius: 3px;
+            border-bottom-left-radius: 3px;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        &__header {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          .set-padding(@padding);
+          margin: 10px 0;
+        }
+
+        &__cost-weight {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          .set-padding(@padding);
+          margin-bottom: 10px;
+
+          .cost-weight {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-right: 20px;
+
+            &__value {
+              font-size: 18px;
+              color: black;
+            }
+
+            &__title {
+              font-size: 12px;
+              color: @secondary-color;
+            }
+          }
+        }
+
+        &__info {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          justify-content: flex-start;
+          color: @secondary-color;
+
+          .button-link {
+            margin-right: 10px;
+          }
+
+          .info__time {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: flex-start;
+            margin-left: 5px;
+          }
+        }
+
+        &__status {
+          color: black;
+          font-weight: bold;
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+        }
+
+        &__icon {
+          &--people {
+            margin-right: 2px;
+            background-image: @icon-run;
+          }
+
+          &--accept {
+            margin-right: 2px;
+            background-image: @icon-accept;
+          }
+
+          &--clock {
+            margin-right: 2px;
+            background-image: @icon-time;
+          }
+        }
+
+        &__path {
+          .path__list {
+            display: block;
+            margin-block-start: 0;
+            margin-block-end: 0;
+            padding-inline-start: 5px;
+
+            p {
+              margin: 0;
+              padding: 0;
+            }
+
+            li {
+              list-style: none;
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              align-items: center;
+              margin-bottom: 5px;
+            }
+
+            &.show-marker {
+              li:before {
+                display: inline-block;
+                vertical-align: middle;
+                height: 16px;
+                width: 16px;
+                content: "";
+                background: @icon-location center center/16px no-repeat;
+                margin-right: 20px;
+              }
+            }
+          }
+        }
+
+        &:not(:first-child) {
+          .delivery-point__header,
+          .delivery-point__cost-weight {
+            padding-left: 35px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@import 'deliveries-desktop.less';
