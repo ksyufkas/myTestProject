@@ -12,7 +12,7 @@
                         <input class="date-picker"
                                id="startDate"
                                placeholder="Выберите дату"
-                               [bsConfig]="{ adaptivePosition: false, containerClass: 'theme-blue' }"
+                               [bsConfig]="{ adaptivePosition: false, containerClass: 'theme-blue', dateInputFormat: 'DD-MM-YYYY hh:mm' }"
                                [(ngModel)]="startDate"
                                bsDatepicker
                                [maxDate]="endDate">
@@ -24,7 +24,7 @@
                         <input class="date-picker"
                                id="endDate"
                                placeholder="Выберите дату"
-                               [bsConfig]="{ adaptivePosition: false, containerClass: 'theme-blue' }"
+                               [bsConfig]="{ adaptivePosition: false, containerClass: 'theme-blue', dateInputFormat: 'DD-MM-YYYY hh:mm' }"
                                [(ngModel)]="endDate"
                                bsDatepicker
                                [minDate]="startDate">
