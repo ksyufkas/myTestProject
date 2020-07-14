@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 /**
  * Компонент Кабинет пользователя
@@ -8,10 +8,4 @@ import {Component, OnInit} from '@angular/core';
     templateUrl: './user-portal.component.html',
     styleUrls: ['./user-portal.less']
 })
-export class UserPortalComponent implements OnInit {
-    constructor() {
-    }
-
-    ngOnInit(): void {
-    }
-}
+export class UserPortalComponent {}

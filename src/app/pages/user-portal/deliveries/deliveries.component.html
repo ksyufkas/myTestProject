@@ -1,12 +1,12 @@
 <div class="deliveries">
-    <div class="card page__header header-filter" [ngClass]="{'filter--hiden': !showFilter}">
-        <div class="filter__title">
+    <div class="card page__header header-filter filter" [ngClass]="{'filter--hiden': !showFilter}">
+        <button type="button" class="filter__title" (click)="changeVisibleFilter()">
             <span class="filter__title--text">Фильтр</span>
-            <button type="button" class="filter__title--arrow" (click)="changeVisibleFilter()"></button>
-        </div>
+            <span class="filter__title--arrow"></span>
+        </button>
         <div class="filter__content">
-            <div class="filter__block block__date-time-picker">
-                <div class="date-time-picker">
+            <div class="filter__block date-time-picker">
+                <div class="date-time-picker__container">
                     <label class="date-time-picker__label">С</label>
                     <div class="date-time-picker__pickers">
                         <input class="date-picker"
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="filter__block">
-                <input type="text" id="name" class="input--text input--name" placeholder="Наименование"
+                <input type="text" id="name" class="input--text input-name" placeholder="Наименование"
                        [(ngModel)]="name">
             </div>
             <div class="filter__block">
@@ -56,7 +56,7 @@
     </div>
     <ng-container *ngIf="deliveriesToDisplay.length">
         <div *ngFor="let delivery of deliveriesToDisplay" class="card delivery-card">
-            <div class="delivery-card__header">
+            <div class="delivery-card__header header">
                 <div class="header__button">
                     <span class="icon header__icon header__icon--repeat"></span>
                     <button type="button"
@@ -84,8 +84,8 @@
                         <div class="delivery-point__type">
                             {{getDeliveryTypeText(deliveryPoint)}}
                         </div>
-                        <div class="delivery-point__info">
-                            <button type="button" class="button-link">№{{deliveryPoint.number}}</button>
+                        <div class="delivery-point__info info">
+                            <a href="" class="button-link">№{{deliveryPoint.number}}</a>
                             <span>{{deliveryPoint.date.toLocaleDateString()}}</span>
                             <span class="info__time">
                                 <span class="icon delivery-point__icon--clock"></span>
@@ -103,7 +103,7 @@
                             <span class="cost-weight__title">вес</span>
                         </div>
                     </div>
-                    <div class="delivery-point__path">
+                    <div class="delivery-point__path path">
                         <ul class="path__list"
                             [ngClass]="{'show-marker': deliveryPoint.state === deliveryStateTypeEnum.InProgress}">
                             <li *ngIf="deliveryPoint.sender">
@@ -137,7 +137,7 @@
         </div>
         <div class="pagination-panel">
             <pagination
-                    class="page__pagination inline-pagination"
+                    class="pagination inline-pagination"
                     *ngIf="deliveriesToDisplay.length < deliveriesCount"
                     [totalItems]="deliveriesCount"
                     [(ngModel)]="pagination.page"

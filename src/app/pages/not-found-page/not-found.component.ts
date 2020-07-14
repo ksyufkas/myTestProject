@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 /**
  * Компонент страницы, которая отображается в случае неизвестного роута
@@ -7,12 +7,4 @@ import {Component, OnInit} from '@angular/core';
     selector: 'not-found',
     templateUrl: './not-found.component.html',
 })
-export class NotFoundComponent implements OnInit {
-    name: string;
-
-    constructor() {
-    }
-
-    ngOnInit(): void {
-    }
-}
+export class NotFoundComponent {}

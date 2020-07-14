@@ -1,6 +1,6 @@
 @import '../../../styles/variables.less';
 @import "../../../styles/mixins";
-@import 'filter.less';
+@import "../../../styles/base-elements";
 
 .deliveries {
   .icon {
@@ -25,38 +25,6 @@
 
     &__header {
       height: 35px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      color: @primary-color;
-      font-size: 12px;
-      .set-padding(@padding);
-
-      .header {
-        &__icon {
-          &--repeat {
-            background-image: @icon-repeat;
-          }
-
-          &--done {
-            background-image: @icon-done;
-          }
-        }
-
-        &__button {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          flex-direction: row;
-          margin-right: 10px;
-        }
-
-        &__group-number {
-          color: @secondary-color;
-          margin-left: auto;
-        }
-      }
     }
 
     &__content {
@@ -131,12 +99,14 @@
             margin-right: 10px;
           }
 
-          .info__time {
-            display: flex;
-            align-items: center;
-            flex-direction: row;
-            justify-content: flex-start;
-            margin-left: 5px;
+          .info {
+            &__time {
+              display: flex;
+              align-items: center;
+              flex-direction: row;
+              justify-content: flex-start;
+              margin-left: 5px;
+            }
           }
         }
 
@@ -165,12 +135,11 @@
           }
         }
 
-        &__path {
+        &__path.path {
           .path__list {
             display: block;
-            margin-block-start: 0;
-            margin-block-end: 0;
-            padding-inline-start: 5px;
+            margin: 0;
+            padding: 0 0 0 5px;
 
             p {
               margin: 0;
@@ -201,14 +170,96 @@
         }
 
         &:not(:first-child) {
-          .delivery-point__header,
-          .delivery-point__cost-weight {
-            padding-left: 35px;
+          .delivery-point {
+            &__header,
+            &__cost-weight {
+              padding-left: 35px;
+            }
           }
         }
       }
     }
   }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    color: @primary-color;
+    font-size: 12px;
+    .set-padding(@padding);
+
+    &__icon {
+      &--repeat {
+        background-image: @icon-repeat;
+      }
+
+      &--done {
+        background-image: @icon-done;
+      }
+    }
+
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: row;
+      margin-right: 10px;
+    }
+
+    &__group-number {
+      color: @secondary-color;
+      margin-left: auto;
+    }
+  }
 }
 
-@import 'deliveries-desktop.less';
+@media (min-width: @min-width) {
+  .deliveries {
+    .card {
+      .set-padding(10px 20px);
+      margin-bottom: 15px;
+    }
+
+    .delivery-card {
+      &__content {
+        .delivery-point {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+
+          &__path {
+            width: 50%;
+
+            &.path {
+              ul.path__list li:before {
+                display: inline-block;
+                vertical-align: middle;
+                height: 16px;
+                width: 16px;
+                content: "";
+                background: @icon-location center center/16px no-repeat;
+                margin-right: 20px;
+              }
+            }
+          }
+
+          &:not(:first-child) {
+            .delivery-point__header,
+            .delivery-point__cost-weight {
+              padding-left: 5px;
+            }
+          }
+        }
+      }
+    }
+
+    .header {
+      .header__group-number {
+        margin-left: 10px;
+      }
+    }
+  }
+}

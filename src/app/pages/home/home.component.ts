@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 /**
  * Домашняя страница
@@ -7,12 +7,4 @@ import {Component, OnInit} from '@angular/core';
     selector: 'home',
     templateUrl: './home.component.html',
 })
-export class HomeComponent implements OnInit {
-    name: string;
-
-    constructor() {
-    }
-
-    ngOnInit(): void {
-    }
-}
+export class HomeComponent {}

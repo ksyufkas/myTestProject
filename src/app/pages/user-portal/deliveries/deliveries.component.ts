@@ -23,8 +23,7 @@ export class Pagination implements IPagination {
     constructor(
         public page: number = 1,
         public itemsPerPage: number = 25,
-    ) {
-    }
+    ) {}
 }
 
 /**
@@ -56,8 +55,7 @@ export class DeliveriesComponent implements OnInit {
     constructor(
         private localeService: BsLocaleService,
         private deliveriesService: DeliveriesService
-    ) {
-    }
+    ) {}
 
     ngOnInit(): void {
         this.showFilter = true;

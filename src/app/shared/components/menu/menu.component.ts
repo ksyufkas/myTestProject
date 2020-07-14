@@ -27,12 +27,12 @@ export class MyMenuComponent implements OnInit {
         this.menuItems = this.menuService.getMenuItems();
         this.primaryMenuItems = [];
         this.primaryMenuItems.push({
-            iconUrl: 'icon--exit',
+            icon: 'exit',
             link: 'logout',
             name: 'Выход',
         });
         this.primaryMenuItems.push({
-            iconUrl: 'icon--back',
+            icon: 'back',
             link: 'site',
             name: 'Вернуться на сайт',
         });
